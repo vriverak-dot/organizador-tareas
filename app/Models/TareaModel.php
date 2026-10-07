@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class TareaModel extends Model
 {
-    protected $table            = 'tareas';
+    protected $table            = 'Tareas';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
