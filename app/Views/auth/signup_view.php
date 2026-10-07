@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - Organizador de Tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            background-color: #e9ecef;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color:#333;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-signup {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .alert-error {
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+        <div>
+            <a href="<?= base_url('tareas') ?>">Inicio</a>
+            <a href="#">English</a>
+            <a href="#">Español</a>
+        </div>
+        <div>
+            <a href="<?= base_url('signup') ?>">Registrarse</a>
+            <a href="<?= base_url('login') ?>">Iniciar Sesión</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Registrarse</h2>
+
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert-error"><?= session()->getFlashdata('error') ?></div>
+        <?php endif; ?>
+
+        <form action="<?= base_url('signup') ?>" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="repeat_password">Repetir Contraseña:</label>
+                <input type="password" id="repeat_password" name="repeat_password" required>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn-signup">Registrarse</button>
+                <a href="<?= base_url('login') ?>" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
