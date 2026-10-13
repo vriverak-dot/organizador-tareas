@@ -25,6 +25,8 @@
             color:#333;
             margin-left: 15px;
             font-weight: bold;
+            font-size: 15px;
+            padding: 5px 8px;
         }
 
         .container {
@@ -38,7 +40,7 @@
 
         h2 {
             margin-top: 0;
-            color: #333;
+            color: #212529;
         }
 
         .form-group {
@@ -102,13 +104,13 @@
 
 <div class="nav">
         <div>
-            <a href="<?= base_url('tareas') ?>">Inicio</a>
-            <a href="#">English</a>
-            <a href="#">Español</a>
+            <a href="<?= base_url('/') ?>" class="nav-link">Inicio</a>
+            <a href="<?= base_url('lang/en') ?>" class="nav-link">English</a>
+            <a href="<?= base_url('lang/es') ?>" class="nav-link">Español</a>
         </div>
         <div>
-            <a href="<?= base_url('signup') ?>">Registrarse</a>
-            <a href="<?= base_url('login') ?>">Iniciar Sesión</a>
+            <a href="<?= base_url('auth/signup') ?>" class="nav-link">Registrarse</a>
+            <a href="<?= base_url('auth/login') ?>" class="nav-link">Iniciar Sesión</a>
         </div>
     </div>
 

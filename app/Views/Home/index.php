@@ -10,41 +10,61 @@
             margin: 0;
             padding: 0;
         }
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-            color: #333;
+        nav.navbar {
+            background-color: #e9ecef;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        p {
-            text-align: center;
-            color: #666;
+        .nav-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
-        a {
-            display: inline-block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+        .nav-link {
             text-decoration: none;
-            border-radius: 5px;
+            color: #333;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 5px 8px;
+            transition: color 0.2s;
         }
-        a:hover {
-            background-color: #0056b3;
+        .nav-link:hover {
+            color: #007bff;
         }
-        .contenedor {
+        .main-content {
+            margin-top: 80px;
             text-align: center;
-            margin-top: 30px;
+            padding: 0 20px;
+        }
+        .main-content h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: #212529;
+        }
+        .main-content p {
+            color: #6c757d;
+            fpont-size: 1.1em;
         }   
     </style>
 </head>   
     <body>
-        <h1>Bienvenido al Organizador de Tareas</h1>
-        <p>Por favor, inicia sesión o regístrate para continuar.</p>
+        <nav class="navbar">
+            <div class="nav-group">
+                <a href="<?= base_url('/') ?>" class="nav-link">Inicio</a>
+                <a href="<?= base_url('lang/en') ?>" class="nav-link">English</a>
+                <a href="<?= base_url('lang/es') ?>" class="nav-link">Español</a>
+            </div>
 
-        <div class="contenedor">
-            <a href="<?= base_url('auth/login') ?>">Iniciar Sesión</a>
-            <a href="<?= base_url('auth/signup') ?>">Registrarse</a>       
-        </div>
+            <div class="nav-group">
+                <a href="<?= base_url('auth/signup') ?>" class="nav-link">Registrarse</a>
+                <a href="<?= base_url('auth/login') ?>" class="nav-link">Iniciar Sesión</a>
+            </div>
+        </nav>
+        <main class="main-content">
+            <h1>Bienvenido al Organizador de Tareas</h1>
+            <p>Por favor, inicia sesión o regístrate para continuar.</p>
+        </main>
     </body>
-
 </html>
