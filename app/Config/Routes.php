@@ -4,11 +4,11 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 
-$routes->get('/', 'TareasController::index');
+$routes->get('/', 'Home::index');
+$routes->get('home', 'Home::index');
 $routes->get('tareas', 'TareasController::index');
-
-$routes->get('login', 'AuthController::login');
-$routes->post('login', 'AuthController::loginProcess');
-$routes->get('signup', 'AuthController::signup');
-$routes->post('signup', 'AuthController::signupProcess');
-$routes->get('logout', 'AuthController::logout');
+$routes->get('auth/login', 'AuthController::login');
+$routes->post('auth/login', 'AuthController::loginProcess');
+$routes->get('auth/signup', 'AuthController::signup');
+$routes->post('auth/signup', 'AuthController::signupProcess');
+$routes->get('auth/logout', 'AuthController::logout');

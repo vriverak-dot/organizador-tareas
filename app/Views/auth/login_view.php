@@ -106,13 +106,13 @@
 <body>
     <div class="nav">
         <div>
-            <a href="<?= base_url('tareas') ?>">Inicio</a>
+            <a href="<?= base_url('home') ?>">Inicio</a>
             <a href="#">English</a>
             <a href="#">Español</a>
         </div>
         <div>
-            <a href="<?= base_url('signup') ?>">Registrarse</a>
-            <a href="<?= base_url('login') ?>">Iniciar Sesión</a>
+            <a href="<?= base_url('auth/signup') ?>">Registrarse</a>
+            <a href="<?= base_url('auth/login') ?>">Iniciar Sesión</a>
         </div>
     </div>
 
