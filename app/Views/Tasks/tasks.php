@@ -1,63 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $titulo ?></title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-            background-color: <div id="f4f6f9">
-        }
-        h1 {
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left; 
-            border-bottom: 1px solid #ddd;
-        }
-        th {   
-            background-color: #007bff;
-            color: #fff;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .estado {
-            font-weight: bold; 
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        .completada {
-            background-color: #d4edda;
-            color: #155723;
-        }
-        .en_progreso {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        .pendiente {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-    </style>
-</head>
-<body>
-    <h1><?= $titulo ?></h1>
-    <table>
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('content') ?>
+
+<div style='padding: 30px;'>
+    <h2><?= $titulo ?></h2>
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
         <thead>
-            <tr>
+            <tr style="background-color: #e9ecef;">
                 <th>ID</th>
                 <th>Usuario</th>
                 <th>Título de la tarea</th>
@@ -83,5 +31,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-</body>
-</html>
+</div>
+<?= $this->endSection() ?>
