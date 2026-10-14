@@ -19,6 +19,6 @@ class TasksController extends BaseController
             'tareas'=>$tareas
             ];
 
-        return view('tasks', $data);
+        return view('Tasks/tasks', $data);
     }
 }
