@@ -5,12 +5,12 @@
 <main class="main-content">
     <?php if (!empty($usuario)): ?>
         <div class="saludo-bienvenida">
-            Bienvenido, <?= esc($usuario) ?></div>
-        <h1>Organizador de Tareas</h1>
-        <p>Gestiona y revisa tus tareas pendientes de manera eficiente.</p>
+            <?= lang('App.welcome_back') ?>, <?= esc($usuario) ?></div>
+        <h1><?= lang('App.app_title') ?></h1>
+        <p><?= lang('App.app_desc') ?></p>
     <?php else: ?>
-    <h1>Bienvenido al Organizador de Tareas</h1>
-    <p>Por favor, inicia sesión o regístrate para continuar.</p>
+    <h1><?= lang('App.welcome') ?></h1>
+    <p><?= lang('App.prompt') ?></p>
     <?php endif; ?>
 </main>
 <?= $this->endSection() ?>

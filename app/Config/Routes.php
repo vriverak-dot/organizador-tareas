@@ -12,3 +12,5 @@ $routes->post('auth/login', 'AuthController::loginProcess');
 $routes->get('auth/signup', 'AuthController::signup');
 $routes->post('auth/signup', 'AuthController::signupProcess');
 $routes->get('auth/logout', 'AuthController::logout');
+
+$routes->get('lang/(:segment)', 'LanguageController::switch/$1');
