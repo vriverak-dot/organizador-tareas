@@ -9,7 +9,7 @@ class AuthController extends BaseController
 {
     public function login()
     {
-      return view('auth/login_view');
+      return view('auth/login');
     }
 
     public function loginProcess()
@@ -46,7 +46,7 @@ class AuthController extends BaseController
 
     public function signup()
     {
-        return view('auth/signup_view');
+        return view('auth/signup');
     }
 
     public function signupProcess()
