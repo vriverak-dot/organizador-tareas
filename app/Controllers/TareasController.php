@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class TareasController extends BaseController
+class TasksController extends BaseController
 {
     public function index()
     {
