@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/main') ?>
+<?= $this->extend('Layouts/default') ?>
 <?= $this->section('content') ?>
 
 <div style='padding: 30px;'>
