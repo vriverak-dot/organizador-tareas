@@ -159,6 +159,7 @@ class AuthController extends BaseController
 
         return redirect()->to(base_url('auth/login'))->with('success', 'Contraseña restablecida exitosamente. Inicia sesión.');
     }
+}
 
     
         
