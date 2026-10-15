@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/default') ?>
+<?= $this->extend('Layouts/default') ?>
 <?= $this->section('content') ?>
 
 <div class="container mt-4">

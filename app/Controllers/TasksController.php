@@ -145,8 +145,8 @@ class TasksController extends BaseController
             return redirect()->to(base_url('auth/login'));
         }
 
-        $tareaModel = new \App\Models\TareaModel();
-        $tarea = $tareaModel->where('id', $id)
+        $tasksModel = new \App\Models\TasksModel();
+        $tarea = $tasksModel->where('id', $id)
                             ->where('user_id', session()->get('user_id'))
                             ->first();
 
