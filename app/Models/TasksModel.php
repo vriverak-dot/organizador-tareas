@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TareaModel extends Model
+class TasksModel extends Model
 {
     protected $table            = 'Tareas';
     protected $primaryKey       = 'id';
@@ -14,13 +14,6 @@ class TareaModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = ['user_id', 'titulo', 'descripcion', 'estado', 'fecha_limite'];
 
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
-
-    // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
