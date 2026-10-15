@@ -89,4 +89,35 @@ class AuthController extends BaseController
         $session->destroy();
         return redirect()->to(base_url('auth/login'));
     }
-}
+
+    public function signupProcess()
+    {
+        $session = session();
+        $userModel = new UserModel();
+    
+        $password = $this->request->getPost('password');
+        $repeatPassword = $this->request->getPost('repeat_password');
+
+        if ($password !== $repeatPassword) {
+            $session->setFlashdata('error', 'Las contraseñas no coinciden.');
+            return redirect()->back()->withInput();
+        }
+
+        $data = [
+            'nombre_completo' => $this->request->getPost('nombre'),
+            'usuario'=> explode('@', $email)[0],
+            'email'=> $email,
+            'password'=> password_hash($password, PASSWORD_DEFAULT),
+        ];
+
+        $userModel->insert($data);
+
+        $emailService = \Config\Services::email();
+        $emailService->setTo($email);
+        $emailService->setSubject('Registro exitoso - Organizador de Tareas');
+        $emailService->setMessage('¡Hola ' . $data['nombre_completo'] . '! Tu cuenta ha sido creada exitosamente. Ya puedes iniciar sesión.');
+        @$emailService->send();
+
+        $session->setFlashdata('success', '¡Registro exitoso! Por favor inicia sesión.');
+        return redirect()->to(base_url('auth/login'));
+    }
