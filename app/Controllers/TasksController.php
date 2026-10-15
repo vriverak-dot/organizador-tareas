@@ -30,4 +30,76 @@ class TasksController extends BaseController
 
         return view('Tasks/tasks', $data);
     }
+    
+    public function edit($id)
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+
+        $tareaModel = new \App\Models\TareaModel();
+        $tarea = $tareaModel->where('id', $id)
+                            ->where('user_id', session()->get('user_id'))
+                            ->first();
+
+        if (!$tarea) {
+            return redirect()->to(base_url('tasks'))->with('error', 'Tarea no encontrada.');
+        }
+
+        return view('Tasks/edit', ['titulo' => 'Editar Tarea', 'tarea' => $tarea]);
+    }
+
+    public function update($id)
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+
+        $rules = [
+            'titulo'       => 'required|min_length[3]|max_length[255]',
+            'descripcion'  => 'required',
+            'estado'       => 'required',
+            'fecha_limite' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $tareaModel = new \App\Models\TareaModel();
+        
+        // Verificar que la tarea pertenezca al usuario actual
+        $tarea = $tareaModel->where('id', $id)->where('user_id', session()->get('user_id'))->first();
+        if (!$tarea) {
+            return redirect()->to(base_url('tasks'))->with('error', 'No tienes permiso para modificar esta tarea.');
+        }
+
+        $tareaModel->update($id, [
+            'titulo'       => $this->request->getPost('titulo'),
+            'descripcion'  => $this->request->getPost('descripcion'),
+            'estado'       => $this->request->getPost('estado'),
+            'fecha_limite' => $this->request->getPost('fecha_limite'),
+        ]);
+
+        return redirect()->to(base_url('tasks'))->with('success', '¡Tarea actualizada exitosamente!');
+    }
+
+    public function delete($id)
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+
+        $tareaModel = new \App\Models\TareaModel();
+        
+        // Verificar que la tarea pertenezca al usuario actual
+        $tarea = $tareaModel->where('id', $id)->where('user_id', session()->get('user_id'))->first();
+        if (!$tarea) {
+            return redirect()->to(base_url('tasks'))->with('error', 'No tienes permiso para eliminar esta tarea.');
+        }
+
+        $tareaModel->delete($id);
+
+        return redirect()->to(base_url('tasks'))->with('success', '¡Tarea eliminada exitosamente!');
+    }
 }
