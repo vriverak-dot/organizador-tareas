@@ -40,8 +40,8 @@
                         <button type="submit" class="btn btn-sucess">Iniciar Sesión</button>
                     </div>
 
-                    <div class="mt-3 text-center">
-                        <a href="<?= base_url('auth/forgot') ?>" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+                    <div class="mt-3 text-end">
+                        <a href="<?= base_url('auth/forgot-password') ?>" class="text-decoration-none small">¿Olvidaste tu contraseña?</a>
                     </div>
                 </form>
             </div>
