@@ -10,4 +10,6 @@ return[
     'app_title' => 'Organizador de Tareas',
     'app_desc' => 'Gestiona y revisa tus tareas pendientes de manera eficiente.',
     'welcome_back' => 'Bienvenido',
+    'tasks' => 'Tareas',
+    'logout' => 'Cerrar Sesión',
 ];  

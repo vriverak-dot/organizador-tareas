@@ -10,4 +10,6 @@ return[
     'app_title' => 'Task Organizer',
     'app_desc' => 'Manage and review your pending tasks effienciently.',
     'welcome_back' => 'Welcome',
+    'tasks' => 'Tasks',
+    'logout' => 'Logout',
 ];  
