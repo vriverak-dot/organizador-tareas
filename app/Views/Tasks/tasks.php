@@ -42,7 +42,11 @@
                             <?php foreach ($tareas as $tarea) : ?>
                                 <tr>
                                     <td><?= esc($tarea['id']) ?></td>
-                                    <td><strong><?= esc($tarea['titulo']) ?></strong></td>
+                                    <td>
+                                        <a href="<?= base_url('tasks/show/' . $tarea['id']) ?>" class="text-decoration-none fw-bold">
+                                            <?= esc($tarea['titulo']) ?></a>
+                                    </td>
+
                                     <td><?= esc($tarea['descripcion']) ?></td>
                                     <td>
                                         <span class="badge bg-<?= (strtolower($tarea['estado']) == 'completada') ? 'success' : 'warning text-dark' ?>">

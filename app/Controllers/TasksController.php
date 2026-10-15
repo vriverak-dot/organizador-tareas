@@ -138,4 +138,22 @@ class TasksController extends BaseController
 
         return redirect()->to(base_url('tasks'))->with('success', '¡Tarea eliminada exitosamente!');
     }
+
+    public function show($id)
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+
+        $tareaModel = new \App\Models\TareaModel();
+        $tarea = $tareaModel->where('id', $id)
+                            ->where('user_id', session()->get('user_id'))
+                            ->first();
+
+        if (!$tarea) {
+            return redirect()->to(base_url('tasks'))->with('error', 'Tarea no encontrada.');
+        }
+
+        return view('Tasks/show', ['titulo' => 'Detalle de Tarea', 'tarea' => $tarea]);
+    }
 }
