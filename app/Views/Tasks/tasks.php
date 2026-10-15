@@ -1,4 +1,4 @@
-<?= $this->extend('Layouts/default') ?>
+<?= $this->extend('layouts/default') ?>
 <?= $this->section('content') ?>
 
 <div class="container mt-4">
@@ -27,7 +27,6 @@
                         <tr>
                             <th>ID</th>
                             <th><?= lang('App.title', [], session('locale') ?? 'es') ?></th>
-                            <th><?= lang('App.description', [], session('locale') ?? 'es') ?></th>
                             <th><?= lang('App.priority', [], session('locale') ?? 'es') ?></th>
                             <th><?= lang('App.status', [], session('locale') ?? 'es') ?></th>
                             <th><?= lang('App.due_date', [], session('locale') ?? 'es') ?></th>
@@ -37,32 +36,27 @@
                     </thead>
                     <tbody>
                         <?php if (!empty($tareas) && is_array($tareas)): ?>
-                             <?php foreach ($tareas as $tarea) : ?>
-                                
+                            <?php foreach ($tareas as $tarea): ?>
                                 <tr>
                                     <td><?= esc($tarea['id']) ?></td>
                                     <td>
                                         <a href="<?= base_url('tasks/show/' . $tarea['id']) ?>" class="text-decoration-none fw-bold">
-                                            <?= esc($tarea['titulo']) ?></a>
+                                            <?= esc($tarea['titulo']) ?>
+                                        </a>
                                     </td>
-
-                                    <td><?= esc($tarea['descripcion']) ?></td>
                                     <td>
                                         <?php 
                                             $badgeColor = 'bg-secondary';
                                             if ($tarea['prioridad'] === 'Alta') {
                                                 $badgeColor = 'bg-danger';
-
                                             } elseif ($tarea['prioridad'] === 'Media') {
-                                                $badgeColor = 'bg-warning test-dark';
-
+                                                $badgeColor = 'bg-warning text-dark';
                                             } elseif ($tarea['prioridad'] === 'Baja') {
-                                                $badgeColor = 'bg-info test-dark';
-                                            } 
+                                                $badgeColor = 'bg-info text-dark';
+                                            }
                                         ?>
                                         <span class="badge <?= $badgeColor ?>"><?= esc($tarea['prioridad']) ?></span>
                                     </td>
-
                                     <td>
                                         <span class="badge bg-secondary"><?= esc($tarea['estado']) ?></span>
                                     </td>
@@ -70,13 +64,13 @@
                                     <td><?= esc($tarea['nombre_completo']) ?></td>
                                     <td class="text-center">
                                         <a href="<?= base_url('tasks/edit/' . $tarea['id']) ?>" class="btn btn-warning btn-sm"><?= lang('App.edit', [], session('locale') ?? 'es') ?></a>
-                                        <a href="<?= base_url('tasks/delete/' . $tarea['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta tarea?');"><?= lang('App.delete', [], session('locale') ?? 'es') ?></a>
+                                        <a href="<?= base_url('tasks/delete/' . $tarea['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta tarea?');"><?= lang('App.delete', [], session('locale') ?? 'es') ?></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                        <?php else : ?>
+                        <?php else: ?>
                             <tr>
-                                <td colspan="8" class="text-center">No hay tareas regsitradas.</tr>
+                                <td colspan="7" class="text-center">No hay tareas registradas.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
@@ -85,4 +79,5 @@
         </div>
     </div>
 </div>
+
 <?= $this->endSection() ?>
