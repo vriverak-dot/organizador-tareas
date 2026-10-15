@@ -18,9 +18,10 @@ $routes->get('lang/(:segment)', 'LanguageController::switch/$1');
 
 $routes->get('tasks', 'TasksController::index');
 $routes->get('tasks/create', 'TasksController::create');
-$routes->get('tasks/Store', 'TasksController::Store');
+$routes->post('tasks/store', 'TasksController::store');
+$routes->get('tasks/show/(:num)', 'TasksController::show/$1'); 
 $routes->get('tasks/edit/(:num)', 'TasksController::edit/$1');
-$routes->get('tasks/update/(:num)', 'TasksController::update/$1');
+$routes->post('tasks/update/(:num)', 'TasksController::update/$1');
 $routes->get('tasks/delete/(:num)', 'TasksController::delete/$1');
 
 
