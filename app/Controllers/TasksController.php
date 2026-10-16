@@ -56,9 +56,9 @@ class TasksController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $tareaModel = new \App\Models\TareaModel();
+        $tasksModel = new \App\Models\TasksModel();
 
-        $tareaModel->save([
+        $tasksModel->save([
             'user_id'      => session()->get('user_id'),
             'titulo'       => $this->request->getPost('titulo'),
             'descripcion'  => $this->request->getPost('descripcion'),
@@ -75,8 +75,8 @@ class TasksController extends BaseController
             return redirect()->to(base_url('auth/login'));
         }
 
-        $tareaModel = new \App\Models\TareaModel();
-        $tarea = $tareaModel->where('id', $id)
+        $tasksModel = new \App\Models\TasksModel();
+        $tarea = $tasksModel->where('id', $id)
                             ->where('user_id', session()->get('user_id'))
                             ->first();
 
@@ -104,14 +104,14 @@ class TasksController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $tareaModel = new \App\Models\TareaModel();
+        $tasksModel = new \App\Models\TasksModel();
         
-        $tarea = $tareaModel->where('id', $id)->where('user_id', session()->get('user_id'))->first();
+        $tarea = $tasksModel->where('id', $id)->where('user_id', session()->get('user_id'))->first();
         if (!$tarea) {
             return redirect()->to(base_url('tasks'))->with('error', 'No tienes permiso para modificar esta tarea.');
         }
 
-        $tareaModel->update($id, [
+        $tasksModel->update($id, [
             'titulo'       => $this->request->getPost('titulo'),
             'descripcion'  => $this->request->getPost('descripcion'),
             'estado'       => $this->request->getPost('estado'),
@@ -127,9 +127,9 @@ class TasksController extends BaseController
             return redirect()->to(base_url('auth/login'));
         }
 
-        $tareaModel = new \App\Models\TareaModel();
+        $tasksModel = new \App\Models\TasksModel();
         
-        $tarea = $tareaModel->where('id', $id)->where('user_id', session()->get('user_id'))->first();
+        $tarea = $tasksModel->where('id', $id)->where('user_id', session()->get('user_id'))->first();
         if (!$tarea) {
             return redirect()->to(base_url('tasks'))->with('error', 'No tienes permiso para eliminar esta tarea.');
         }

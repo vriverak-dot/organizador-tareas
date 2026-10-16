@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-sucess">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
                     </div>
 
                     <div class="mt-3 text-end">

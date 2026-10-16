@@ -16,7 +16,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <strong>Prioridad:</strong> 
-                            <span class="badge bg-<?= $tarea['prioridad'] == 'Alta' ? 'danger' : ($tarea['prioridad'] == 'Media' ? 'warning text-dark' : 'info text-dark') ?>">
+                            <span class="badge bg-<?= $tarea['prioridad'] == 'Alta' ? 'danger' : ($tarea['prioridad'] == 'Media' ? 'warning text-dark' : 'info text-green') ?>">
                                 <?= esc($tarea['prioridad']) ?>
                             </span>
                         </div>

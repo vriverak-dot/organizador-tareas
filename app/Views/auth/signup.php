@@ -16,13 +16,13 @@
                     <?= csrf_field() ?>
                         
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nombre Completo:</label>
-                        <input type="text" id="name" name="name" class="form-control" required value="<?= old('name') ?>">
+                        <label for="nombre_completo" class="form-label">Nombre Completo:</label>
+                        <input type="text" id="nombre_completo" name="nombre_completo" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" required value="<?= old('email') ?>">
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-sucess">Registrarse</button>
+                        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
                         <a href="<?= base_url('/') ?>" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>

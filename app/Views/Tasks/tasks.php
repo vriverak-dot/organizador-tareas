@@ -29,9 +29,6 @@
                             <th><?= lang('App.title', [], session('locale') ?? 'es') ?></th>
                             <th><?= lang('App.priority', [], session('locale') ?? 'es') ?></th>
                             <th><?= lang('App.status', [], session('locale') ?? 'es') ?></th>
-                            <th><?= lang('App.due_date', [], session('locale') ?? 'es') ?></th>
-                            <th>Creador</th>
-                            <th><?= lang('App.actions', [], session('locale') ?? 'es') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,12 +56,6 @@
                                     </td>
                                     <td>
                                         <span class="badge bg-secondary"><?= esc($tarea['estado']) ?></span>
-                                    </td>
-                                    <td><?= esc($tarea['fecha_limite']) ?></td>
-                                    <td><?= esc($tarea['nombre_completo']) ?></td>
-                                    <td class="text-center">
-                                        <a href="<?= base_url('tasks/edit/' . $tarea['id']) ?>" class="btn btn-warning btn-sm"><?= lang('App.edit', [], session('locale') ?? 'es') ?></a>
-                                        <a href="<?= base_url('tasks/delete/' . $tarea['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta tarea?');"><?= lang('App.delete', [], session('locale') ?? 'es') ?></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
