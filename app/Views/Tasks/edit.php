@@ -36,6 +36,7 @@
                                 <label for="estado" class="form-label">Estado:</label>
                                 <select class="form-select" id="estado" name="estado" required>
                                     <option value="Pendiente" <?= (old('estado', $tarea['estado']) == 'Pendiente') ? 'selected' : '' ?>>Pendiente</option>
+                                    <option value="En_Proceso" <?= (old('estado', $tarea['estado']) == 'En_Proceso') ? 'selected' : '' ?>>En Proceso</option>
                                     <option value="Completada" <?= (old('estado', $tarea['estado']) == 'Completada') ? 'selected' : '' ?>>Completada</option>
                                 </selected>
                             </div>

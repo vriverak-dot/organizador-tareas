@@ -31,4 +31,5 @@ return [
     'update_password' => 'Update Password',
     'send_link' => 'Send Link',
     'login_again' => 'Log In Again' 
+  
 ];
