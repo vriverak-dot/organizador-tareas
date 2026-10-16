@@ -30,5 +30,7 @@ return [
     'confirm_password' => 'Confirmar Contraseña',
     'update_password' => 'Actualizar Contraseña',
     'send_link' => 'Enviar enlace',
-    'login_again' => 'Volver a Iniciar Sesión' 
+    'login_again' => 'Volver a Iniciar Sesión',
+    'profile' => 'Perfil',
+    'users' => 'Usuarios',
 ];

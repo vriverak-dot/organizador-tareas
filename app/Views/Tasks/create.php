@@ -13,13 +13,13 @@
                             <div class="alert alert-danger">
                                 <ul class="mb-0">
                                     <?php foreach (session('errors') as $error): ?>
-                                        <li><?= esc('$error') ?></li>
+                                        <li><?= esc($error) ?></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
                         <?php endif; ?>
 
-                        <form action="<?= base_url('tasks/store/') ?>" method="post">
+                        <form action="<?= base_url('tasks/store') ?>" method="post">
                             <?= csrf_field() ?>
 
                                 <div class="mb-3">
@@ -36,25 +36,25 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="prioridad" class="form-label"><?= lang('App.priority', [], session('locale') ?? 'es') ?></label>
                                     <select class="form-select" id="prioridad" name="prioridad" required>
-                                        <option value="Baja" <?= (old('prioridad', $tarea['prioridad']) == 'Baja') ? 'selected' : '' ?>>Baja</option>
-                                        <option value="Media" <?= (old('prioridad', $tarea['prioridad']) == 'Media') ? 'selected' : '' ?>>Media</option>
-                                        <option value="Alta" <?= (old('prioridad', $tarea['prioridad']) == 'Alta') ? 'selected' : '' ?>>Alta</option>
-                                    </selected>
+                                        <option value="Baja" <?= old('prioridad') == 'Baja' ? 'selected' : '' ?>>Baja</option>
+                                        <option value="Media" <?= old('prioridad') == 'Media' ? 'selected' : '' ?>>Media</option>
+                                        <option value="Alta" <?= old('prioridad') == 'Alta' ? 'selected' : '' ?>>Alta</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <label for="estado" class="form-label"><?= lang('App.status', [], session('locale') ?? 'es') ?><</label>
                                     <select class="form-select" id="estado" name="estado" required>
-                                        <option value="Pendiente" <?= (old('estado', $tarea['estado']) == 'Pendiente') ? 'selected' : '' ?>>Pendiente</option>
-                                        <option value="En_Proceso" <?= (old('estado', $tarea['estado']) == 'En_Proceso') ? 'selected' : '' ?>>En Proceso</option>
-                                        <option value="Completada" <?= (old('estado', $tarea['estado']) == 'Completada') ? 'selected' : '' ?>>Completada</option>
+                                        <option value="Pendiente" <?= old('estado') == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                                        <option value="En_Proceso" <?= old('estado') == 'En_Proceso' ? 'selected' : '' ?>>En Proceso</option>
+                                        <option value="Completada" <?= old('estado') == 'Completada' ? 'selected' : '' ?>>Completada</option>
                                     </selected>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="fecha_limite" class="form-label"><?= lang('App.due_date', [], session('locale') ?? 'es') ?></label>
-                                <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" value="<?= old('fecha_limite', $tarea['fecha_limite']) ?>" required>
+                                <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" value="<?= old('fecha_limite') ?>" required>
                             </div>
                             
                             <div class="d-flex justify-content-between">

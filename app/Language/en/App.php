@@ -30,6 +30,8 @@ return [
     'confirm_password' => 'Confirm Password',
     'update_password' => 'Update Password',
     'send_link' => 'Send Link',
-    'login_again' => 'Log In Again' 
+    'login_again' => 'Log In Again',
+    'profile' => 'Profile',
+    'users' => 'Users',
   
 ];

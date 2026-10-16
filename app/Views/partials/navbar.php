@@ -13,6 +13,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('tasks') ?>"><?= lang('App.tasks', [], session('locale') ?? 'es') ?></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('profile') ?>"><?= lang('App.profile', [], session('locale') ?? 'es') ?></a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('users') ?>"><?= lang('App.users', [], session('locale') ?? 'es') ?></a>
+                    </li>
                 <?php endif; ?>
             </ul>
             <ul class="navbar-nav ms-auto align-items-center">
@@ -22,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link px-2" href="<?= base_url('lang/es') ?>"><?= lang('App.spanish', [], session('locale') ?? 'es') ?></a>
                 </li>
-
+                    
                 <?php if (session()->get('logged_in') || session()->get('user_id')) : ?>
                     <li class="nav-item ms-2">
                         <a class="btn btn-outline-danger btn-sm" href="<?= base_url('auth/logout') ?>"><?= lang('App.logout', [], session('locale') ?? 'es') ?></a>

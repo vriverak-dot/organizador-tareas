@@ -45,22 +45,22 @@ class TasksController extends BaseController
             'descripcion'  => 'required',
             'prioridad'    => 'required|in_list[Baja,Media,Alta]',
             'estado'       => 'required',
-            'fecha_limite' => 'required|valid_date'
+            'fecha_limite' => 'required|valid_date',
         ];
 
         if (! $this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $taskModel = new \App\Models\TaskModel(); 
+        $tasksModel = new \App\Models\TasksModel(); 
 
-        $taskModel->save([
+        $tasksModel->save([
             'titulo'       => $this->request->getPost('titulo'),
             'descripcion'  => $this->request->getPost('descripcion'),
             'prioridad'    => $this->request->getPost('prioridad'),
             'estado'       => $this->request->getPost('estado'),
             'fecha_limite' => $this->request->getPost('fecha_limite'),
-            'id_usuario'   => session()->get('id') 
+            'user_id'   => session()->get('id') ?? 1
         ]);
 
         return redirect()->to(base_url('tasks'))->with('success', 'Tarea creada exitosamente.');
@@ -131,7 +131,7 @@ class TasksController extends BaseController
             return redirect()->to(base_url('tasks'))->with('error', 'No tienes permiso para eliminar esta tarea.');
         }
 
-        $tareaModel->delete($id);
+        $tasksModel->delete($id);
 
         return redirect()->to(base_url('tasks'))->with('success', '¡Tarea eliminada exitosamente!');
     }

@@ -3,7 +3,7 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2><?= esc($titulo) ?></h2>
+        <h1 class="text-center mb-4"><?= esc($titulo) ?></h1>
         <a href="<?= base_url('tasks/create') ?>" class="btn btn-success"><?= lang('App.new_task', [], session('locale') ?? 'es') ?></a>
     </div>
 
