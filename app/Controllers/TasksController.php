@@ -52,7 +52,7 @@ class TasksController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $taskModel = new \App\Models\TaskModel(); // O el nombre de tu modelo de tareas
+        $taskModel = new \App\Models\TaskModel(); 
 
         $taskModel->save([
             'titulo'       => $this->request->getPost('titulo'),
@@ -60,7 +60,7 @@ class TasksController extends BaseController
             'prioridad'    => $this->request->getPost('prioridad'),
             'estado'       => $this->request->getPost('estado'),
             'fecha_limite' => $this->request->getPost('fecha_limite'),
-            'id_usuario'   => session()->get('id') // O el campo que use para relacionar al usuario logueado
+            'id_usuario'   => session()->get('id') 
         ]);
 
         return redirect()->to(base_url('tasks'))->with('success', 'Tarea creada exitosamente.');
