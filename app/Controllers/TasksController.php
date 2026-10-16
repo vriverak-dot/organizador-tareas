@@ -32,41 +32,38 @@ class TasksController extends BaseController
     
     public function create()
     {
-        if (!session()->get('logged_in') && !session()->get('user_id')) {
-            return redirect()->to(base_url('auth/login'));
-        }
-
-        return view('Tasks/create', ['titulo' => 'Nueva Tarea']);
+        $data = [
+            'titulo' => 'Nueva Tarea'
+        ];
+        return view('Tasks/create', $data);
     }
 
     public function store()
     {
-        if (!session()->get('logged_in') && !session()->get('user_id')) {
-            return redirect()->to(base_url('auth/login'));
-        }
-
         $rules = [
-            'titulo'       => 'required|min_length[3]|max_length[255]',
+            'titulo'       => 'required|min_length[3]',
             'descripcion'  => 'required',
+            'prioridad'    => 'required|in_list[Baja,Media,Alta]',
             'estado'       => 'required',
-            'fecha_limite' => 'required'
+            'fecha_limite' => 'required|valid_date'
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $tasksModel = new \App\Models\TasksModel();
+        $taskModel = new \App\Models\TaskModel(); // O el nombre de tu modelo de tareas
 
-        $tasksModel->save([
-            'user_id'      => session()->get('user_id'),
+        $taskModel->save([
             'titulo'       => $this->request->getPost('titulo'),
             'descripcion'  => $this->request->getPost('descripcion'),
+            'prioridad'    => $this->request->getPost('prioridad'),
             'estado'       => $this->request->getPost('estado'),
             'fecha_limite' => $this->request->getPost('fecha_limite'),
+            'id_usuario'   => session()->get('id') // O el campo que use para relacionar al usuario logueado
         ]);
 
-        return redirect()->to(base_url('tasks'))->with('success', '¡Tarea creada exitosamente!');
+        return redirect()->to(base_url('tasks'))->with('success', 'Tarea creada exitosamente.');
     }
     
     public function edit($id)
