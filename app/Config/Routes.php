@@ -25,7 +25,9 @@ $routes->post('tasks/update/(:num)', 'TasksController::update/$1');
 $routes->get('tasks/delete/(:num)', 'TasksController::delete/$1');
 
 $routes->get('profile', 'ProfileController::show');
+
 $routes->get('users', 'UsersController::index');
+$routes->get('users/(:num)', 'UsersController::show/$1');
 $routes->get('users/show/(:num)', 'UsersController::show/$1');
 
 
