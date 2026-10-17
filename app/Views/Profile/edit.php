@@ -22,8 +22,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <?php if (!empty($usuario['profile_image'])): ?>
-                                <img src="<?= base_url('uploads/' . $usuario['profile_image']) ?>" alt="Profile" width="150" class="img-thumbnail mb-2"><br>
+                            <?php if (!empty($user['profile_image'])): ?>
+                                <img src="<?= base_url('uploads/' . $user['profile_image']) ?>" alt="Profile" width="150" class="img-thumbnail mb-2"><br>
                             <?php else: ?>
                                 <img src="<?= base_url('assets/default-avatar.png') ?>" alt="Profile" width="150" class="img-thumbnail mb-2"><br>
                             <?php endif; ?>
@@ -32,12 +32,12 @@
      
                         <div class="mb-3">
                             <label>Name</label>
-                            <p class="text-muted"><?= esc($usuario['nombre_completo'] ?? $usuario['name']) ?></p>
+                            <p class="text-muted"><?= esc($user['nombre_completo'] ?? $user['nombre_completo']) ?></p>
                         </div>
                         
                         <div class="mb-3">
                             <label>email</label>
-                            <p class="text-muted"><?= esc($usuario['email']) ?></p>
+                            <p class="text-muted"><?= esc($user['email']) ?></p>
                         </div>
                         
                         <div class="d-flex gap-2">
