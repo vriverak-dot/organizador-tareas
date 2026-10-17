@@ -28,8 +28,8 @@ class ProfileController extends BaseController
             $usuario = [
                 'id'              => $userId ?? 1,
                 'nombre_completo' => $session->get('nombre_completo') ?? $session->get('nombre') ?? $session->get('usuario') ?? 'Carlos Eduardo Mendoza',
-                'email'           => $session->get('email') ?? 'carlos@example.com',
-                'username'        => $session->get('username') ?? 'carlos'
+                'email'           => $session->get('email') 
+                'username'        => $session->get('username')
             ];
         }
 
@@ -39,7 +39,7 @@ class ProfileController extends BaseController
     private function checkAuth()
     {
         if (!session()->get('logged_in') && !session()->get('user_id')) {
-            return redirect()->to(base_url('auth/login'));
+            return redirect()->to(base_url('auth/login'))->with('error', 'Debes iniciar sesión.');
         }
         return null;
     }
@@ -52,13 +52,13 @@ class ProfileController extends BaseController
         $userId = session()->get('user_id') ?? session()->get('id');
         $data['user'] = $model->find($userId);
 
-        return view('profile/index', $data);
+        return view('Profile/show', $data);
     }
 
     public function authenticate()
     {
         if ($redirect = $this->checkAuth()) return $redirect;
-        return view('profile/authenticate');
+        return view('Profile/authenticate');
     }
 
     public function verifyPassword()
@@ -83,14 +83,14 @@ class ProfileController extends BaseController
         if ($redirect = $this->checkAuth()) return $redirect;
 
         if (!session()->getFlashdata('password_verified')) {
-            return redirect()->to(base_url('profile/edit'))->with('error', 'Debes ingresar tu contraseña primero.');
+            return redirect()->to(base_url('profile/edit'))->with('error', 'Debes confirmar tu contraseña primero.');
         }
 
         $model = new UserModel();
         $userId = session()->get('user_id') ?? session()->get('id');
         $data['user'] = $model->find($userId);
 
-        return view('profile/edit', $data);
+        return view('Profile/edit', $data);
     }
 
     public function update()
@@ -106,37 +106,6 @@ class ProfileController extends BaseController
         ];
 
         $model->update($userId, $data);
-        return redirect()->to(base_url('profile'))->with('success', 'Perfil actualizado exitosamente.');
-    }
-
-    public function changePasswordForm()
-    {
-        if ($redirect = $this->checkAuth()) return $redirect;
-        return view('profile/change_password');
-    }
-
-
-    public function updatePassword()
-    {
-        if ($redirect = $this->checkAuth()) return $redirect;
-
-        $currentPassword = $this->request->getPost('current_password');
-        $newPassword     = $this->request->getPost('new_password');
-        $repeatPassword  = $this->request->getPost('repeat_password');
-
-        if ($newPassword !== $repeatPassword) {
-            return redirect()->back()->with('error', 'Las contraseñas no coinciden.');
-        }
-
-        $model = new UserModel();
-        $userId = session()->get('user_id') ?? session()->get('id');
-        $user = $model->find($userId);
-
-        if (!password_verify($currentPassword, $user['password'])) {
-            return redirect()->back()->with('error', 'La contraseña actual es incorrecta.');
-        }
-
-        $model->update($userId, ['password' => password_hash($newPassword, PASSWORD_DEFAULT)]);
-        return redirect()->to(base_url('profile'))->with('success', 'Contraseña actualizada exitosamente.');
+        return redirect()->to(base_url('profile'))->with('success', 'Perfil actualizado con éxito.');
     }
 }
