@@ -1,53 +1,34 @@
 <?= $this->extend('Layouts/default') ?>
 <?= $this->section('content') ?>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4"><?= lang('App.users') ?? 'Lista de Usuarios' ?></h2>
-  
-    <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <?= session()->getFlashdata('success') ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre / Usuario</th>
-                            <th>Correo Electrónico</th>
-                            <th class="text-center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($usuarios) && is_array($usuarios)): ?>
-                            <?php foreach ($usuarios as $u): ?>
-                                <tr>
-                                    <td><?= esc($u['id'] ?? '') ?></td>
-                                    <td><?= esc($u['nombre_completo'] ?? $u['username'] ?? 'N/A') ?></td>
-                                    <td><?= esc($u['email'] ?? 'N/A') ?></td>
-                                    <td class="text-center">
-                                        <a href="<?= base_url('users/show/' . ($u['id'] ?? 0)) ?>" class="btn btn-sm btn-outline-primary">Ver</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Detalles del Usuario</h4>
+                </div>
+                <div class="card-body text-center">
+                    
+                    <div class="mb-4">
+                        <?php if (!empty($user['profile_image'])): ?>
+                            <img src="<?= base_url('uploads/' . $user['profile_image']) ?>" alt="Perfil" width="150" height="150" class="rounded-circle img-thumbnail object-fit-cover">
                         <?php else: ?>
-                            <tr>
-                                <td colspan="4" class="text-center text-muted">No hay usuarios registrados.</td>
-                            </tr>
+                            <img src="<?= base_url('assets/default-avatar.png') ?>" alt="Default" width="150" height="150" class="rounded-circle img-thumbnail object-fit-cover">
                         <?php endif; ?>
-                    </tbody>
-                </table>
+                    </div>
+
+                    <ul class="list-group list-group-flush text-start mb-3">
+                        <li class="list-group-item"><strong>ID:</strong> <?= esc($user['id']) ?></li>
+                        <li class="list-group-item"><strong>Nombre Completo:</strong> <?= esc($user['nombre_completo']) ?></li>
+                        <li class="list-group-item"><strong>Usuario:</strong> <?= esc($user['usuario']) ?></li>
+                        <li class="list-group-item"><strong>Correo Electrónico:</strong> <?= esc($user['email']) ?></li>
+                    </ul>
+
+                    <a href="<?= base_url('users') ?>" class="btn btn-secondary">Regresar a la lista</a>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="text-center mt-4">
-        <a href="<?= base_url('/') ?>" class="btn btn-secondary">Regresar al Inicio</a>
     </div>
 </div>
 
