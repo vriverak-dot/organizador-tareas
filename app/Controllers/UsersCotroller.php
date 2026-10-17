@@ -20,7 +20,7 @@ class UsersController extends BaseController
         $userModel = new UserModel();
         $usuarios = $userModel->findAll();
 
-        return view('Users/show', ['usuarios' => $usuarios]);
+        return view('Users/index', ['usuarios' => $usuarios]);
     }
 
     public function show($id = null)
