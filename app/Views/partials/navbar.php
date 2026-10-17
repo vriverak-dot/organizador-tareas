@@ -17,12 +17,13 @@
                         <a class="nav-link" href="<?= base_url('profile') ?>"><?= lang('App.profile') ?></a>
                     </li>
 
-                    <?php $userId = session()->get('user_id') ?? session()->get('id');
-                        $rol = session()->get('rol') ?? session()->get('tipo'); ?>
-                    <?php if ($rol === 'admin' || $rol === 'administrador'): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('users') ?>"><?= lang('App.users') ?></a>
-                        </li>
+                    <?php 
+                        $userId = session()->get('user_id') ?? session()->get('id') ?? session()->get('id_usuario') ?? session()->get('usuario_id');
+                    ?>
+                    <?php if ($userId == 1): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('users') ?>"><?= lang('App.users') ?></a>
+                    </li>
                     <?php endif; ?>
                 <?php endif; ?>
             </ul>
