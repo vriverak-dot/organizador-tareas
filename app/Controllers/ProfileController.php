@@ -67,12 +67,17 @@ class ProfileController extends BaseController
 
         $password = $this->request->getPost('password');
         $model = new UserModel();
-        $userId = session()->get('user_id') ?? session()->get('id');
+
+        $userId = session()->get('user_id') ?? session()->get('id') ?? session()->get('id_usuario');
         $user = $model->find($userId);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user) {
+            $storedPassword = $user['password'] ?? $user['contrasena'] ?? '';
+
+        if (password_verify($password, $storedPassword) || $password === $storedPassword) {
             session()->setFlashdata('password_verified', true);
             return redirect()->to(base_url('profile/edit-form'));
+            }
         }
 
         return redirect()->back()->with('error', 'Contraseña incorrecta.');
