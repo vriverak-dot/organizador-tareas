@@ -35,4 +35,108 @@ class ProfileController extends BaseController
 
         return view('Profile/show', ['usuario' => $usuario]);
     }
+
+    private function checkAuth()
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+        return null;
+    }
+
+    public function index()
+    {
+        if ($redirect = $this->checkAuth()) return $redirect;
+
+        $model = new UserModel();
+        $userId = session()->get('user_id') ?? session()->get('id');
+        $data['user'] = $model->find($userId);
+
+        return view('profile/index', $data);
+    }
+
+    public function authenticate()
+    {
+        if ($redirect = $this->checkAuth()) return $redirect;
+        return view('profile/authenticate');
+    }
+
+    public function verifyPassword()
+    {
+        if ($redirect = $this->checkAuth()) return $redirect;
+
+        $password = $this->request->getPost('password');
+        $model = new UserModel();
+        $userId = session()->get('user_id') ?? session()->get('id');
+        $user = $model->find($userId);
+
+        if ($user && password_verify($password, $user['password'])) {
+            session()->setFlashdata('password_verified', true);
+            return redirect()->to(base_url('profile/edit-form'));
+        }
+
+        return redirect()->back()->with('error', 'Contraseña incorrecta.');
+    }
+
+    public function editForm()
+    {
+        if ($redirect = $this->checkAuth()) return $redirect;
+
+        if (!session()->getFlashdata('password_verified')) {
+            return redirect()->to(base_url('profile/edit'))->with('error', 'Debes ingresar tu contraseña primero.');
+        }
+
+        $model = new UserModel();
+        $userId = session()->get('user_id') ?? session()->get('id');
+        $data['user'] = $model->find($userId);
+
+        return view('profile/edit', $data);
+    }
+
+    public function update()
+    {
+        if ($redirect = $this->checkAuth()) return $redirect;
+
+        $userId = session()->get('user_id') ?? session()->get('id');
+        $model = new UserModel();
+
+        $data = [
+            'name'  => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email')
+        ];
+
+        $model->update($userId, $data);
+        return redirect()->to(base_url('profile'))->with('success', 'Perfil actualizado exitosamente.');
+    }
+
+    public function changePasswordForm()
+    {
+        if ($redirect = $this->checkAuth()) return $redirect;
+        return view('profile/change_password');
+    }
+
+
+    public function updatePassword()
+    {
+        if ($redirect = $this->checkAuth()) return $redirect;
+
+        $currentPassword = $this->request->getPost('current_password');
+        $newPassword     = $this->request->getPost('new_password');
+        $repeatPassword  = $this->request->getPost('repeat_password');
+
+        if ($newPassword !== $repeatPassword) {
+            return redirect()->back()->with('error', 'Las contraseñas no coinciden.');
+        }
+
+        $model = new UserModel();
+        $userId = session()->get('user_id') ?? session()->get('id');
+        $user = $model->find($userId);
+
+        if (!password_verify($currentPassword, $user['password'])) {
+            return redirect()->back()->with('error', 'La contraseña actual es incorrecta.');
+        }
+
+        $model->update($userId, ['password' => password_hash($newPassword, PASSWORD_DEFAULT)]);
+        return redirect()->to(base_url('profile'))->with('success', 'Contraseña actualizada exitosamente.');
+    }
 }
