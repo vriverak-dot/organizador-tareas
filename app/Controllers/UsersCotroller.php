@@ -12,6 +12,11 @@ class UsersController extends BaseController
             return redirect()->to(base_url('auth/login'))->with('error', 'Debes iniciar sesión primero.');
         }
 
+        $rol = session()->get('rol') ?? session()->get('tipo');
+        if ($rol !== 'admin' && $rol !== 'administrador') {
+            return redirect()->to(base_url('/'))->with('error', 'No tienes permisos para acceder a esta sección.');
+        }
+
         $userModel = new UserModel();
         $usuarios = $userModel->findAll();
 
