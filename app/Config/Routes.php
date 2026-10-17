@@ -25,6 +25,17 @@ $routes->post('tasks/update/(:num)', 'TasksController::update/$1');
 $routes->get('tasks/delete/(:num)', 'TasksController::delete/$1');
 
 $routes->get('profile', 'ProfileController::show');
+$routes->get('profile', 'ProfileController::index');
+$routes->get('profile/edit', 'ProfileController::authenticate');
+$routes->post('profile/verify', 'ProfileController::verifyPassword'); 
+$routes->get('profile/edit-form', 'ProfileController::editForm'); 
+$routes->post('profile/update', 'ProfileController::update');
+$routes->get('profile/change-password', 'ProfileController::changePasswordForm');
+$routes->post('profile/update-password', 'ProfileController::updatePassword');
+$routes->get('profile/change-image', 'ProfileController::changeImageForm');
+$routes->post('profile/upload-image', 'ProfileController::uploadImage');
+$routes->get('profile/delete-image', 'ProfileController::deleteImageConfirm');
+$routes->post('profile/delete-image-process', 'ProfileController::deleteImage');
 
 $routes->get('users', 'UsersController::index');
 $routes->get('users/(:num)', 'UsersController::show/$1');
