@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
-
 class UsersController extends BaseController
 {
     public function index()
@@ -17,10 +15,10 @@ class UsersController extends BaseController
             return redirect()->to(base_url('/'))->with('error', 'No tienes permisos para acceder a esta sección.');
         }
 
-        $userModel = new UserModel();
-        $usuarios = $userModel->findAll();
+        $model = new \App\Models\UserModel();
+        $data['users'] = $model->findAll();
 
-        return view('Users/index', ['usuarios' => $usuarios]);
+        return view('users/index', $data);
     }
 
     public function show($id = null)
@@ -34,13 +32,13 @@ class UsersController extends BaseController
             return redirect()->to(base_url('/'))->with('error', 'No tienes permisos.');
         }
 
-        $userModel = new UserModel();
-        $usuario = $userModel->find($id);
+        $model = new \App\Models\UserModel();
+        $data['user'] = $model->find($id);
 
-        if (!$usuario) {
-            return redirect()->to(base_url('users'))->with('error', 'Usuario no encontrado.');
+        if (empty($data['user'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario no encontrado: ' . $id);
         }
 
-        return view('Users/show', ['usuario' => $usuario]);
+        return view('users/show', $data);
     }
 }
