@@ -11,11 +11,9 @@ class UsersController extends BaseController
         if (!session()->get('logged_in') && !session()->get('user_id')) {
             return redirect()->to(base_url('auth/login'))->with('error', 'Debes iniciar sesión primero.');
         }
-        
-        $userId = session()->get('user_id') ?? session()->get('id');
-        $rol = session()->get('rol') ?? session()->get('tipo');
-        
-        if ($userId != 1 && $rol !== 'admin' && $rol !== 'administrador') {
+
+        $userId = session()->get('user_id') ?? session()->get('id') ?? session()->get('id_usuario');
+        if ($userId != 1) {
             return redirect()->to(base_url('/'))->with('error', 'No tienes permisos para acceder a esta sección.');
         }
 
@@ -23,5 +21,26 @@ class UsersController extends BaseController
         $usuarios = $userModel->findAll();
 
         return view('Users/show', ['usuarios' => $usuarios]);
+    }
+
+    public function show($id = null)
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'))->with('error', 'Debes iniciar sesión primero.');
+        }
+
+        $userId = session()->get('user_id') ?? session()->get('id') ?? session()->get('id_usuario');
+        if ($userId != 1) {
+            return redirect()->to(base_url('/'))->with('error', 'No tienes permisos.');
+        }
+
+        $userModel = new UserModel();
+        $usuario = $userModel->find($id);
+
+        if (!$usuario) {
+            return redirect()->to(base_url('users'))->with('error', 'Usuario no encontrado.');
+        }
+
+        return view('Users/show', ['usuario' => $usuario]);
     }
 }
