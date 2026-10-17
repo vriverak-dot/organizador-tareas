@@ -28,7 +28,7 @@ class ProfileController extends BaseController
             $usuario = [
                 'id'              => $userId ?? 1,
                 'nombre_completo' => $session->get('nombre_completo') ?? $session->get('nombre') ?? $session->get('usuario') ?? 'Carlos Eduardo Mendoza',
-                'email'           => $session->get('email') 
+                'email'           => $session->get('email'),
                 'username'        => $session->get('username')
             ];
         }
