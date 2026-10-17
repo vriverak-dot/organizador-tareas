@@ -9,8 +9,10 @@
 
 <form action="<?= base_url('profile/verify') ?>" method="post">
     <?= csrf_field() ?>
-    <label>PASSWORD</label>
-    <input type="password" name="password" required>
+    <div class="mb-3">
+        <label for="password" class="form-label">Contraseña:</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+    </div>
 
     <button type="submit" class="btn btn-success">Send</button>
     <a href="<?= base_url('profile') ?>" class="btn btn-danger">Cancel</a>
