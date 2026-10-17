@@ -26,6 +26,7 @@ $routes->get('tasks/delete/(:num)', 'TasksController::delete/$1');
 
 $routes->get('profile', 'ProfileController::show');
 $routes->get('users', 'UsersController::show');
+$routes->get('users/show/(:num)', 'UsersController::show');
 
 
 
