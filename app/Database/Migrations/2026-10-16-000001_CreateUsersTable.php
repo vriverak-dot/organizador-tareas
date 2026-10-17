@@ -45,12 +45,6 @@ class CreateUsersTable extends Migration
 
         $this->forge->addKey('id', true);
         $this->forge->createTable('users', true);
-
-        $data = [
-          'nombre_completo' => $this->request->getPost('name'),
-          'email'           => $this->request->getPost('email')
-        ];
-        $model->update($userId, $data);
     }
 
     public function down()
