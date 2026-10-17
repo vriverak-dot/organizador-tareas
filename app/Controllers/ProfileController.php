@@ -113,4 +113,93 @@ class ProfileController extends BaseController
         $model->update($userId, $data);
         return redirect()->to(base_url('profile'))->with('success', 'Perfil actualizado con éxito.');
     }
+
+    public function changePasswordForm()
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+        return view('Profile/change_password');
+    }
+
+    public function updatePassword()
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+
+        $currentPassword = $this->request->getPost('current_password');
+        $newPassword     = $this->request->getPost('new_password');
+        $repeatPassword  = $this->request->getPost('repeat_password');
+
+        if ($newPassword !== $repeatPassword) {
+            return redirect()->back()->with('error', 'Las nuevas contraseñas no coinciden.');
+        }
+
+        $model = new \App\Models\UserModel();
+        $userId = session()->get('user_id') ?? session()->get('id') ?? session()->get('id_usuario');
+        $user = $model->find($userId);
+
+        $storedPassword = $user['password'] ?? $user['contrasena'] ?? '';
+
+        if (!password_verify($currentPassword, $storedPassword) && $currentPassword !== $storedPassword) {
+            return redirect()->back()->with('error', 'La contraseña actual es incorrecta.');
+        }
+
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $model->update($userId, ['password' => $hashedPassword]);
+
+        return redirect()->to(base_url('profile'))->with('success', 'Contraseña actualizada exitosamente.');
+    }
+
+    public function changeImageForm()
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+        return view('Profile/change_image');
+    }
+
+    public function uploadImage()
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+
+        $file = $this->request->getFile('profile_image');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move(FCPATH . 'uploads', $newName);
+
+            $model = new \App\Models\UserModel();
+            $userId = session()->get('user_id') ?? session()->get('id') ?? session()->get('id_usuario');
+            $model->update($userId, ['profile_image' => $newName]);
+
+            return redirect()->to(base_url('profile'))->with('success', 'Imagen de perfil actualizada.');
+        }
+
+        return redirect()->back()->with('error', 'Selecciona una imagen válida.');
+    }
+
+    public function deleteImage()
+    {
+        if (!session()->get('logged_in') && !session()->get('user_id')) {
+            return redirect()->to(base_url('auth/login'));
+        }
+
+        $model = new \App\Models\UserModel();
+        $userId = session()->get('user_id') ?? session()->get('id') ?? session()->get('id_usuario');
+        $user = $model->find($userId);
+
+        if (!empty($user['profile_image'])) {
+            $filePath = FCPATH . 'uploads/' . $user['profile_image'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            $model->update($userId, ['profile_image' => null]);
+        }
+
+        return redirect()->to(base_url('profile'))->with('success', 'Imagen de perfil eliminada.');
+    }
 }
