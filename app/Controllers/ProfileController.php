@@ -202,4 +202,24 @@ class ProfileController extends BaseController
 
         return redirect()->to(base_url('profile'))->with('success', 'Imagen de perfil eliminada.');
     }
+
+    public function deleteImageConfirm()
+    {
+        $userId = session()->get('user_id') ?? session()->get('id');
+        $model = new \App\Models\UserModel();
+        
+        $user = $model->find($userId);
+    
+        if ($user && !empty($user['profile_image'])) {
+            $imagePath = ROOTPATH . 'public/uploads/' . $user['profile_image'];
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+    
+            $model->update($userId, ['profile_image' => null]);
+        }
+    
+        return redirect()->to(base_url('profile'))->with('success', 'Imagen de perfil eliminada correctamente.');
+     }
 }
