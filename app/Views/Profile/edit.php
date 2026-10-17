@@ -27,7 +27,9 @@
                             <?php else: ?>
                                 <img src="<?= base_url('assets/default-avatar.png') ?>" alt="Profile" width="150" class="img-thumbnail mb-2"><br>
                             <?php endif; ?>
-                            <a href="<?= base_url('profile/delete-image') ?>" class="btn btn-danger btn-sm">Delete Profile image</a>
+                            <a href="<?= base_url('profile/delete-image') ?>" 
+                               class="btn btn-danger btn-sm" 
+                               onclick="return confirm('¿Estás seguro de que deseas eliminar tu imagen de perfil?');">Eliminar Image</a>
                         </div>
      
                         <div class="mb-3">
