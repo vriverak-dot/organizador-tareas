@@ -38,6 +38,31 @@
                 </li>
             </ul>
 
+            <div class="mb-3">
+                <?php if (!empty($usuario['profile_image'])): ?>
+                    <img src="<?= base_url('uploads/' . $usuario['profile_image']) ?>" alt="Profile" width="150" class="img-thumbnail mb-2"><br>
+                <?php else: ?>
+                    <img src="<?= base_url('assets/default-avatar.png') ?>" alt="Profile" width="150" class="img-thumbnail mb-2"><br>
+                <?php endif; ?>
+                    <a href="<?= base_url('profile/delete-image') ?>" class="btn btn-danger btn-sm">Delete Profile image</a>
+            </div>
+
+            <div class="mb-3">
+                <label>Name</label>
+                <p class="text-muted"><?= esc($usuario['nombre_completo'] ?? $usuario['name']) ?></p>
+            </div>
+
+            <div class="mb-3">
+                <label>email</label>
+                <p class="text-muted"><?= esc($usuario['email']) ?></p>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <a href="<?= base_url('profile/edit') ?>" class="btn btn-primary">Edit</a>
+                <a href="<?= base_url('profile/change-password') ?>" class="btn btn-primary">Change password</a>
+                <a href="<?= base_url('profile/change-image') ?>" class="btn btn-primary">Change profile image</a>
+            </div>
+            
             <div class="d-flex justify-content-between mt-4">
                 <a href="<?= base_url('/') ?>" class="btn btn-secondary">Regresar al Inicio</a>
                 <a href="<?= base_url('profile/edit') ?>" class="btn btn-primary">Editar Perfil</a>
